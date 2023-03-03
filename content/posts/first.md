@@ -8,12 +8,12 @@ math: true
 
 
 
-# Introduction
+## Introduction
 
-PCA is one of the most widely/often used methods in data science/machine learning. It is mainly used for reducing the dimension of a high dimensional data that comes handy when extracting important features relevant for further data analysis/machine learning algorithms. For example, inn linear regression there is a benefit of no-correlation betweeen principle components that is a bit of headache when dealing with original variables, not to mention the reduced computational cost from dealing with a few relevant principle components. The lower-dimension, to which the data is projected to, is chosen so that a certain desired fraction of the full extent of the original data is retained in the projected lower-dimensional space. 
+PCA is one of the most widely used methods in data science/machine learning. It is mainly used for reducing the dimension of a high dimensional data that comes handy when extracting important features relevant for further data analysis/machine learning algorithms. For example, in linear regression not having correlation betweeen principle components alleviate the bit of headache when dealing with original variables that are often correlated and give inconsistent p-values depending on which order they were included in estimating the coefficients, not to mention the reduced computational cost from dealing with a few relevant principle components as opposed to the full-extent of the original variables. The lower-dimension, to which the data is projected to, is chosen so that a certain desired fraction of the full extent of the original data is retained in the projected lower-dimensional space. 
 
 
-# Within-groups sum of squared distances (WSS): #
+## Within-groups sum of squared distances (WSS): #
 
 $$
 WSS_k =  \sum_{l=1}^k{\sum_{x_i \in {C_l}}{d^2(x_i, \overline{x_l})}}

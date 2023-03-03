@@ -14,7 +14,7 @@ PCA is one of the most widely used methods in data science/machine learning. It 
 To illustrate the application and the workings of PCA, we will start with a simple fake-data with individual entries recording values of two features/variables. Many such entries make up a rectangular format of data with each row corresponding to an entry and each column corresponding to a feature/variable. Many statistical packages/environments specialize in manipulating such rectangular data (often called dataframes) and the rectangular array of numbers lend themselves to myriads of matrix-decomposition techniques of which singular-value-decomposition (SVD) is one, the backbone behind PCA. We will look at the inner workings of SVD in a later post. For now we will focus mainly on interpreting the results of PCA (SVD) for the practical benefits of an analyst/a data-scientist.
 
  
-![HaHa][/fig1_pca_scatter.png]
+![HaHa](/fig1_pca_scatter.png)
 
 
 

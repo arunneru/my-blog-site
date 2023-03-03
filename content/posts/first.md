@@ -8,12 +8,12 @@ math: true
 
 
 
-# Need for validation of clusters
+# Introduction
 
-Clustering algorithms are designed such that they come out with a given number of clusters even if the underlying data is devoid of any such clusters.
-We will see a criterion to assess the credibility of the clusters produced by any clustering algorithm.
+PCA is one of the most widely/often used methods in data science/machine learning. It is mainly used for reducing the dimension of a high dimensional data that comes handy when extracting important features relevant for further data analysis/machine learning algorithms. For example, inn linear regression there is a benefit of no-correlation betweeen principle components that is a bit of headache when dealing with original variables, not to mention the reduced computational cost from dealing with a few relevant principle components. The lower-dimension, to which the data is projected to, is chosen so that a certain desired fraction of the full extent of the original data is retained in the projected lower-dimensional space. 
 
-## Within-groups sum of squared distances (WSS): 
+
+# Within-groups sum of squared distances (WSS): #
 
 $$
 WSS_k =  \sum_{l=1}^k{\sum_{x_i \in {C_l}}{d^2(x_i, \overline{x_l})}}

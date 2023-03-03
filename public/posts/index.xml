@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on ExampleSite</title>
+    <link>https://www.arunneru.com/posts/</link>
+    <description>Recent content in Posts on ExampleSite</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 24 Jul 2022 15:23:28 +0100</lastBuildDate><atom:link href="https://www.arunneru.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>First</title>
+      <link>https://www.arunneru.com/posts/first/</link>
+      <pubDate>Sun, 24 Jul 2022 15:23:28 +0100</pubDate>
+      
+      <guid>https://www.arunneru.com/posts/first/</guid>
+      <description>Need for validation of clusters Clustering algorithms are designed such that they come out with a given number of clusters even if the underlying data is devoid of any such clusters. We will see a criterion to assess the credibility of the clusters produced by any clustering algorithm.
+Within-groups sum of squared distances (WSS): $$ WSS_k = \sum_{l=1}^k{\sum_{x_i \in {C_l}}{d^2(x_i, \overline{x_l})}} $$
+where, $k$ is the number of clusters and within the l-th cluster $C_l$, $x_l$ is the centre of mass.</description>
+    </item>
+    
+  </channel>
+</rss>

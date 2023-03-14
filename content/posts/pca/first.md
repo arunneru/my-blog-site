@@ -19,34 +19,3 @@ To illustrate the application and the workings of PCA, we will start with a simp
 Fig.1 shows a scatterplot of points representing the data. A projection of these points to a line is shown in Fig.1a. It is not any line but a line that is closest to all the points in the data. The points, upon being projected to this line, moved the least they could when projected to any line we can imagine. This line is the first principal component axis. 
 
 In some lucky cases, the points would have hardly moved at all. In these cases, we can use the projected points as a proxy for the original points. Instead of storing, let’s say, twenty numbers for an original data point, we need just one number locating it along the principal component axis. This first principal component retains the maximum information about the original data. In other words, it explains the most variance present in the original data. Now, consider all the lines that run perpendicular to the first principal component axis. Of all those lines, one is closest to the data points. It is, as you may have guessed, the second principal component. The second principal component explains most of the variance left unexplained by the first principal component. We can extend this process to get at more principal components until all the variance is captured by all of the principal components we iteratively found. We should be able to faithfully reconstruct the original data from the sum of projected data along these principal component axes.
-
-
-
-
-
-
-## Within-groups sum of squared distances (WSS): #
-
-$$
-WSS_k =  \sum_{l=1}^k{\sum_{x_i \in {C_l}}{d^2(x_i, \overline{x_l})}}
-$$
-
-where, $k$ is the number of clusters and within the l-th cluster $C_l$, $x_l$ is the centre of mass.
-We are interested in finding the *elbow* where there is a sudden drop in WSS_k as k is increased. 
-
-```{r}
-library("dplyr")
-simdat <- lapply(c(0, 8), function(mx) {
-    lapply(c(0, 8), function(my) {
-        tibble(
-            x = rnorm(100, mean = mx, sd = 2),
-            y = rnorm(100, mean = my, sd = 2),
-            class = paste(mx, my, sep = ":")
-        )
-    }) %>% bind_rows()
-}) %>% bind_rows()
-
-simdat
-```
-
-

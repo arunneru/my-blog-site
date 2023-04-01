@@ -16,6 +16,8 @@ To illustrate the application and the workings of PCA, we will start with a simp
  
  ![HaHa](/image/fig1_pca_scatter.png)
 
-Fig.1 shows a scatterplot of points representing the data. A projection of these points to a line is shown in Fig.1a. It is not any line but a line that is closest to all the points in the data. The points, upon being projected to this line, moved the least they could when projected to any line we can imagine. This line is the first principal component axis. 
+Fig.1 shows a scatterplot of points representing the data. 
+
+A projection of these points to a line is shown in Fig.1a. It is not any line but a line that is closest to all the points in the data. The points, upon being projected to this line, moved the least they could when projected to any line we can imagine. This line is the first principal component axis. 
 
 In some lucky cases, the points would have hardly moved at all. In these cases, we can use the projected points as a proxy for the original points. Instead of storing, let’s say, twenty numbers for an original data point, we need just one number locating it along the principal component axis. This first principal component retains the maximum information about the original data. In other words, it explains the most variance present in the original data. Now, consider all the lines that run perpendicular to the first principal component axis. Of all those lines, one is closest to the data points. It is, as you may have guessed, the second principal component. The second principal component explains most of the variance left unexplained by the first principal component. We can extend this process to get at more principal components until all the variance is captured by all of the principal components we iteratively found. We should be able to faithfully reconstruct the original data from the sum of projected data along these principal component axes.

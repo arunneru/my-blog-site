@@ -229,12 +229,9 @@ corrplot(M, method='color', order='alphabet')#+
 #labs(title="Color plot of the Correlation matrix of all the variables")
 # library("PerformanceAnalytics") #
 # chart.Correlation(x_plt, histogram=TRUE, pch=19) #
-
 ```
 
- ```
  ![ImOne](/image/correlation_plot.png)
-```
 
 
 ```{r Linear regression."}

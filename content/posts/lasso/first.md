@@ -330,9 +330,7 @@ lasso_coef <- predict(out, type = "coefficients", s=bestlam)
 #plot(ln(grid),l_err)
 ```
 
-```
 ![ImTwo](/image/cross_validation.png)
-```
 
 
 ```{r variable-non-zero-coef, fig.cap = "In the linear model with GDP as the response variable and the minimum cross-validation error, the coefficients of significant variables are retained. Conversely, the lasso method introduces additional sparsity constraints, reducing the coefficients of other variables to zero."}
@@ -347,7 +345,7 @@ p + coord_flip()#+
   #labs(title="Important variables (with non-zero coefficients)",
   #subtitle="Response: GDP")
 ```
-![HaHa](/image/coef_variableNonZero.png)
+![ImThree](/image/coef_variableNonZero_gdp.png)
 
 
 ## Happiness Index as the response variable ##
@@ -442,3 +440,4 @@ p <- ggplot(lasso_coef_df, aes(x=predictors, y=size_of_the_coefficients)) + geom
 p + coord_flip()
 ```
 
+![ImThree](/image/coef_variableNonZero_happiness.png)

@@ -6,14 +6,14 @@ theme: PaperMod
 math: true
 ---
 
-The lasso is a modified regression method that gained in popularity after the works of Tibshirani. It is like linear regression in that it minimizes the deviation of the observed responses from the predictions of a linear model. It differs from linear regression in that it picks important predictors/variables (i.e, does variable selection) from the available predictors. The linear model produced by linear regression has non-zero coefficients for all the variables. This might be disadvantageous if there are a large number of variables that do not influence or modify the outcome or response in any major way. For example, we might be interested in predicting gdp (gross domestic product) from the values of many socio-economic factors/predictors. In this case, a few variables like per-capita income of a country might correlate with gdp while many other variables like the healthy life expectancy might not correlate with it. If we have many such indicators/factors/variables that are not relevant and are not correlated with the desired outcome variable, the way of the linear regression (i.e, including all the variables in the model) would seem less efficient way to come up with a predictive model. The lasso alleviates this problem by constraining the sum of absolute values of the coefficients to be lower than otherwise ( The loss function includes both the sum of squared errors as well as the sum of L1 norms of the coefficients). This has the desired effect of bringing some coefficients (those of non-relevant variables) all the way to zero thereby eliminating the corresponding variables completely from the linear model. 
+ The lasso is a modified regression method that gained popularity following the work of Tibshirani (Tibishirani et. al, 1996). It shares similarities with linear regression in that it aims to minimize the difference between observed responses and the predictions of a linear model. However, it sets itself apart by performing variable selection, effectively picking the most important predictors from the available set.
 
 
-In this article, we will apply the lasso method on a set socio-economic indicators (All from the year 2017 unless stated otherwise) of countries sampled from World Bank, International Monetary Fund and other similar sources and we will use the GDP (gross domestic product) as a response variable. Some of the indicators extracted from these sources are known to be highly correlated with the gross domestic product while others, infamously, not so. We will see if the lasso eliminates these variables in its attempt to satisfy the sparsity constraints. 
+In contrast to linear regression, where all variables receive non-zero coefficients, the lasso offers a solution when there is a large number of irrelevant variables that do not significantly influence the outcome. For example, when predicting GDP based on numerous socio-economic factors, variables like per-capita income may correlate with GDP, while others like healthy life expectancy may not. When many such irrelevant variables exist, including all of them in a linear regression model can be inefficient. The lasso addresses this by constraining the sum of the absolute values of coefficients to be lower (achieving this through a loss function that combines sum of squared errors and the sum of L1 norms of coefficients). This effectively reduces some coefficients, making them zero, and eliminates the corresponding variables from the linear model.
 
+In this article, we will apply the lasso method to a dataset of socio-economic indicators (all from the year 2017 unless specified otherwise) from sources such as the World Bank and the International Monetary Fund. Our goal is to predict GDP using these indicators as predictor variables. Some of these indicators are known to be highly correlated with GDP, while others are not. We will examine whether the lasso eliminates these less relevant variables to achieve sparsity.
 
-We would also like to know if these socio-economic factors can be used to predict the world happiness index, which was, like many similar indices, developed in part to address the shortcomings of GDP. The world happiness index, inspired from a similar index due to the Bhutan government, was developed by academics from Harvard University and is estimated from surveys conducted across the globe. 
-
+Additionally, we aim to explore whether these socio-economic factors can be used to predict the World Happiness Index. This index, inspired by a similar one in Bhutan, was developed by Harvard University academics and is based on global surveys conducted to assess happiness levels.
 
 
 ### Downloading the relevant data ###
@@ -21,8 +21,8 @@ We would also like to know if these socio-economic factors can be used to predic
 
 ### Some world bank development indicators ###
 
-First, we will download some important indicators from world bank through the WDI (World Development Indicators) package in R. You can find many online resources on how to find and download any relevant indicators. Here is a link for one: https://worldpoliticsdatalab.org/tutorials/data-wrangling-and-graphing-world-bank-data-in-r-with-the-wdi-package/
-
+Initially, we will retrieve essential indicators from the World Bank using the WDI (World Development Indicators) package in R. Numerous online resources provide guidance on locating and downloading relevant indicators. You can refer to this tutorial for detailed instructions: https://worldpoliticsdatalab.org/tutorials/data-wrangling-and-graphing-world-bank-data-in-r-with-the-wdi-package/
+ 
 
 ```{r }
 
@@ -47,7 +47,7 @@ dat = WDI(indicator=c("NY.GDP.MKTP.CD",# gdp -# the gross domestic product
 
 ## Human development index data ##
 
-The file was manually downloaded from the website ( [https://hdr.undp.org/data-center] (https://hdr.undp.org/data-center)) and the development indices for 2017 and 2018 were extracted and copied to a separate file. 
+The file was manually downloaded from the website ( [https://hdr.undp.org/data-center] (https://hdr.undp.org/data-center)) and the development indices for 2017 and 2018 were extracted and saved in a separate file. 
 
 ```{r}
 
@@ -91,7 +91,8 @@ colnames(tax) <- c("iso2c", "tax_revenue")
 
 ## helper file from countrycode package ##
 
-We need to combine all these separate data sets into a single one. Though we can combine them based on the country names, a more efficient way would be to use iso-3/iso-2 code or imf code (From International monetary fund). The library "countrycode" offers these codes for all the countries. 
+Our next step involves merging all these individual datasets into a unified one. While we can perform this merging based on country names, a more efficient approach is to use either the ISO-3/ISO-2 codes or IMF codes (from the International Monetary Fund). We can conveniently access these codes for all countries using the 'countrycode' library.
+
 
 
 ```{r}
@@ -152,10 +153,9 @@ colnames(final_dat) <- c("iso2c",
 
 ```
 
+Instead of relying solely on the Gini coefficient for the year 2017, we have opted to use the median Gini coefficient for each country over multiple years. This approach helps address the issue of missing values, which is prevalent when restricting our analysis to a single year, such as 2017.
 
-
-We are using the median gini coefficient of a country over the years instead of gini coefficient for 2017 as there are lot of missing values if we restrict ourselves to just 2017. 
-
+	
 ```{r}
 
 # fifth_dat <- na.omit(fifth_dat) #
@@ -178,8 +178,8 @@ final_dat_numeric <- final_dat %>% select(gdp, life_exp_at_birth, life_exp_at_bi
 
 ```
 
+We will employ the 'mice' package to impute missing values, specifically utilizing the lasso method provided by the 'mice' package for this purpose.	
 
-We will use the mice package to fill in the missing values; More specifically, the lasso method from mice package to fill in the missing values.
 
 ```{r}
 library(mice)
@@ -222,7 +222,7 @@ x_plt <- data.matrix(final_dat_complete[,predictors_plt])
 
 ## Plotting the correlation matrix with histogram and scatterplots ##
 
-```{r correlation-plot, fig.cap = "Correlation matrix of all the variables. Gross Domestic Product (GDP) shows high positive correlation with population size while happiness index shows high positive correlation with variables like access_electricity, human development indices (hdi_2017 and hdi_2018), and life expectancies."}
+```{r correlation-plot, fig.cap = "Correlation matrix of all the variables. Gross Domestic Product (GDP) exhibits a strong positive correlation with population size, whereas the happiness index demonstrates a notable positive correlation with variables such as access to electricity, human development indices (hdi_2017 and hdi_2018), and life expectancies."}
 library(corrplot)
 M = cor(x_plt)
 corrplot(M, method='color', order='alphabet')#+
@@ -231,6 +231,10 @@ corrplot(M, method='color', order='alphabet')#+
 # chart.Correlation(x_plt, histogram=TRUE, pch=19) #
 
 ```
+
+ ![HaHa](/image/correlation_plot.png)
+
+
 
 ```{r Linear regression."}
 
@@ -273,7 +277,7 @@ lm_fit <- lm(gdp~., data=final_dat_stand)
 
 
 ## Splitting the data into training and test batch and fitting the lasso ##
-```{r cross-validation, fig.cap = "Average Mean Squared Errors (MSEs) plotted against the tuning parameter -- that controlled the extent of the sparsity constraint in the loss function -- in the bootstrapping procedure with the standard deviation of the errors shown as vertical bars straddling individual data points."}
+	```{r cross-validation, fig.cap = ""We plotted the Average Mean Squared Errors (MSEs) against the tuning parameter, which controlled the extent of the sparsity constraint within the loss function, during the bootstrapping procedure. The vertical bars, straddling individual data points, represent the standard deviation of the errors."}
 library(glmnet)
 standardize = function(x){
   
@@ -327,7 +331,7 @@ lasso_coef <- predict(out, type = "coefficients", s=bestlam)
 
 
 
-```{r variable-non-zero-coef, fig.cap = "The coefficients of the important variables in the linear model (with the minimum cross-validation error) with GDP as the response variable. The coefficients of other variables are reduced all the way to zero by the additional sparsity contraints introduced by the lasso method."}
+```{r variable-non-zero-coef, fig.cap = "In the linear model with GDP as the response variable and the minimum cross-validation error, the coefficients of significant variables are retained. Conversely, the lasso method introduces additional sparsity constraints, reducing the coefficients of other variables to zero."}
 lasso_coef_df <- as.data.frame(matrix(lasso_coef))
 lasso_coef_df$predictors <- rownames(lasso_coef)
 colnames(lasso_coef_df) <- c("size_of_the_coefficients", "predictors")
@@ -369,7 +373,7 @@ predictors <- c("gdp",
 
 
 ## Splitting the data into training and test batch and fitting the lasso - for happiness ##
-```{r cross-validation-happiness, fig.cap = "Average Mean Squared Errors (MSEs) plotted against the tuning parameter -- that controlled the extent of the sparsity constraint in the loss function -- in the bootstrapping procedure with the standard deviation of the errors shown as vertical bars straddling individual data points."}
+```{r cross-validation-happiness, fig.cap = "We plotted the Average Mean Squared Errors (MSEs) against the tuning parameter, which controlled the extent of the sparsity constraint within the loss function, during the bootstrapping procedure. The vertical bars, straddling individual data points, represent the standard deviation of the errors."}
 library(glmnet)
 standardize = function(x){
   
@@ -420,8 +424,6 @@ lasso_coef <- predict(out, type = "coefficients", s=bestlam)
 #l_err <- apply(lasso_pred, 2, function(x){sum((x-y_test)^2)})
 #plot(ln(grid),l_err)
 ```
-
-
 
 ```{r variables-non-zero-coef, fig.cap = "The coefficients of the important variables in the linear model (with the minimum cross-validation error) with Happiness Index as the response variable. Notice new predictors that predict happiness index (like access to electricity ) and some opposite trends (like population size) ."}
 

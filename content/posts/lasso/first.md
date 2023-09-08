@@ -350,7 +350,7 @@ p + coord_flip()#+
   #labs(title="Important variables (with non-zero coefficients)",
   #subtitle="Response: GDP")
 ```
-![HaHa](/image/coef_variableNonZero.tiff)
+![HaHa](/image/coef_variableNonZero.jpeg)
 
 
 ## Happiness Index as the response variable ##

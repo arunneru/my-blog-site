@@ -280,6 +280,7 @@ lm_fit <- lm(gdp~., data=final_dat_stand)
 
 ```{r cross-validation, fig.cap = ""We plotted the Average Mean Squared Errors (MSEs) against the tuning parameter, which controlled the extent of the sparsity constraint within the loss function, during the bootstrapping procedure. The vertical bars, straddling individual data points, represent the standard deviation of the errors."}
 
+
 library(glmnet)
 standardize = function(x){
   

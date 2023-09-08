@@ -328,6 +328,7 @@ lasso_coef <- predict(out, type = "coefficients", s=bestlam)
 #l_err <- apply(lasso_pred, 2, function(x){sum((x-y_test)^2)})
 #plot(ln(grid),l_err)
 ```
+ ![HaHa](/image/cross_validation.png)
 
 
 

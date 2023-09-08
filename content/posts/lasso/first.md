@@ -232,7 +232,7 @@ corrplot(M, method='color', order='alphabet')#+
 
 ```
 
- ![HaHa](/image/correlation_plot.png)
+ ![HaHa](image/correlation_plot.png)
 
 
 

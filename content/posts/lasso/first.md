@@ -233,6 +233,7 @@ corrplot(M, method='color', order='alphabet')#+
 
  ![ImOne](/image/correlation_plot.png)
 
+Correlation matrix of all the variables. Gross Domestic Product (GDP) shows high positive correlation with population size while happiness index shows high positive correlation with variables like access\_electricity, human development indices (hdi\_2017 and hdi_2018), and life expectancies
 
 ```{r Linear regression."}
 

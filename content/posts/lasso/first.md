@@ -232,7 +232,8 @@ corrplot(M, method='color', order='alphabet')#+
 ```
 
  ![ImOne](/image/correlation_plot.png)
-Correlation matrix of all the variables. Gross Domestic Product (GDP) shows high positive correlation with population size while happiness index shows high positive correlation with variables like access\_electricity, human development indices (hdi\_2017 and hdi_2018), and life expectancies
+
+Fig.1. Correlation matrix of all the variables. Gross Domestic Product (GDP) shows high positive correlation with population size while happiness index shows high positive correlation with variables like access\_electricity, human development indices (hdi\_2017 and hdi_2018), and life expectancies
 
 ```{r Linear regression."}
 
@@ -332,6 +333,7 @@ lasso_coef <- predict(out, type = "coefficients", s=bestlam)
 
 ![ImTwo](/image/cross_validation.png)
 
+Fig.2. We plotted the Average Mean Squared Errors (MSEs) against the tuning parameter, which controlled the extent of the sparsity constraint within the loss function, during the bootstrapping procedure. The vertical bars, straddling individual data points, represent the standard deviation of the errors.
 
 ```{r variable-non-zero-coef, fig.cap = "In the linear model with GDP as the response variable and the minimum cross-validation error, the coefficients of significant variables are retained. Conversely, the lasso method introduces additional sparsity constraints, reducing the coefficients of other variables to zero."}
 
@@ -346,6 +348,8 @@ p + coord_flip()#+
   #subtitle="Response: GDP")
 ```
 ![ImThree](/image/coef_variableNonZero_gdp.png)
+
+Fig.3. In the linear model with GDP as the response variable and the minimum cross-validation error, the coefficients of significant variables are retained. Conversely, the lasso method introduces additional sparsity constraints, reducing the coefficients of other variables to zero. 
 
 
 ## Happiness Index as the response variable ##
@@ -371,8 +375,6 @@ predictors <- c("gdp",
                 "privCap_2_gdp", 
                 "publCap_2_gdp", 
                 "debt_2_gdp")
-
-
 ```
 
 
@@ -441,3 +443,5 @@ p + coord_flip()
 ```
 
 ![ImThree](/image/coef_variableNonZero_happiness.png)
+
+Fig.4. The coefficients of the important variables in the linear model (with the minimum cross-validation error) with Happiness Index as the response variable. Notice new predictors that predict happiness index (like access to electricity ) and some opposite trends (like population size).

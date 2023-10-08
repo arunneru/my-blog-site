@@ -89,7 +89,7 @@ colnames(tax) <- c("iso2c", "tax_revenue")
 
 
 
-### helper file from countrycode package ##
+### Helper file from countrycode package ##
 
 Our next step involves merging all these individual datasets into a unified one. While we can perform this merging based on country names, a more efficient approach is to use either the ISO-3/ISO-2 codes or IMF codes (from the International Monetary Fund). We can conveniently access these codes for all countries using the 'countrycode' library.
 

@@ -45,7 +45,7 @@ dat = WDI(indicator=c("NY.GDP.MKTP.CD",# gdp -# the gross domestic product
 
 
 
-## Human development index data ##
+### Human development index data ###
 
 The file was manually downloaded from the website ( [https://hdr.undp.org/data-center] (https://hdr.undp.org/data-center)) and the development indices for 2017 and 2018 were extracted and saved in a separate file. 
 
@@ -56,7 +56,7 @@ dat_dev_ind
 
 ```
 
-## World happiness index ##
+### World happiness index ##
 
 World happiness index for 2018 is downloaded from world happiness report 2018 website [https://worldhappiness.report/ed/2018/] (https://worldhappiness.report/ed/2018/) .
 
@@ -89,7 +89,7 @@ colnames(tax) <- c("iso2c", "tax_revenue")
 
 
 
-## helper file from countrycode package ##
+### helper file from countrycode package ##
 
 Our next step involves merging all these individual datasets into a unified one. While we can perform this merging based on country names, a more efficient approach is to use either the ISO-3/ISO-2 codes or IMF codes (from the International Monetary Fund). We can conveniently access these codes for all countries using the 'countrycode' library.
 
@@ -188,7 +188,7 @@ final_dat_complete <- complete(mice(final_dat_numeric, method="lasso.norm"))
 ```
 
 
-# Using GDP as a response variable #
+### Using GDP as a response variable #
 
 ```{r}
 
@@ -220,7 +220,7 @@ x_plt <- data.matrix(final_dat_complete[,predictors_plt])
 ```
 
 
-## Plotting the correlation matrix with histogram and scatterplots ##
+### Plotting the correlation matrix with histogram and scatterplots ##
 
 ```{r correlation-plot, fig.cap = "Correlation matrix of all the variables. Gross Domestic Product (GDP) exhibits a strong positive correlation with population size, whereas the happiness index demonstrates a notable positive correlation with variables such as access to electricity, human development indices (hdi_2017 and hdi_2018), and life expectancies."}
 library(corrplot)
@@ -275,7 +275,7 @@ lm_fit <- lm(gdp~., data=final_dat_stand)
 
 
 
-## Splitting the data into training and test batch and fitting the lasso ##
+### Splitting the data into training and test batch and fitting the lasso ##
 
 ```{r cross-validation, fig.cap = ""We plotted the Average Mean Squared Errors (MSEs) against the tuning parameter, which controlled the extent of the sparsity constraint within the loss function, during the bootstrapping procedure. The vertical bars, straddling individual data points, represent the standard deviation of the errors."}
 
@@ -352,7 +352,7 @@ p + coord_flip()#+
 Fig.3. In the linear model with GDP as the response variable and the minimum cross-validation error, the coefficients of significant variables are retained. Conversely, the lasso method introduces additional sparsity constraints, reducing the coefficients of other variables to zero. 
 
 
-## Happiness Index as the response variable ##
+### Happiness Index as the response variable ##
 
 ```{r}
 
@@ -378,7 +378,7 @@ predictors <- c("gdp",
 ```
 
 
-## Splitting the data into training and test batch and fitting the lasso - for happiness ##
+### Splitting the data into training and test batch and fitting the lasso - for happiness ##
 ```{r cross-validation-happiness, fig.cap = "We plotted the Average Mean Squared Errors (MSEs) against the tuning parameter, which controlled the extent of the sparsity constraint within the loss function, during the bootstrapping procedure. The vertical bars, straddling individual data points, represent the standard deviation of the errors."}
 library(glmnet)
 standardize = function(x){

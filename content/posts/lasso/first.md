@@ -1,4 +1,4 @@
----
+y---
 title: "Growth, Development and Happiness - the lasso with some socio-economic indicators"
 date: 
 draft: false
@@ -189,7 +189,7 @@ final_dat_complete <- complete(mice(final_dat_numeric, method="lasso.norm"))
 
 
 # Using GDP as a response variable #
-s
+
 ```{r}
 
 response <- "gdp"

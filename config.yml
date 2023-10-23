@@ -45,7 +45,7 @@ params:
   # home-info mode
   homeInfoParams:
     Title: "Hi there \U0001F44B"
-    Content: Welcome to my blog. I write tech blogs and stories here. 
+    Content: I am a newbie blogger. These are my pet experiments in data science and fiction writing. I know you can't wait to read my next my next blog post. Just to quench your thirst for knowledge and good stories, my dear reader, I will try my best to post at regular intervals.
 
   socialIcons:
     - name: twitter
